@@ -1,7 +1,13 @@
+import React, { useState } from "react";
 import { faTrashCan } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { useLoaderData } from "react-router-dom";
+import { deleteShoppingCart } from "../utilities/fakedb";
 
-const Cart = ({ cartProducts, children, handleClearCart }) => {
+const ShoppingCart = () => {
+  const locatStorageProducts = useLoaderData();
+  const [cartProducts, setCartProducts] = useState(locatStorageProducts);
+
   let price = 0;
   let tax = 0;
   let grandTotal = 0;
@@ -18,8 +24,13 @@ const Cart = ({ cartProducts, children, handleClearCart }) => {
     grandTotal = price + tax;
   }
 
+  const handleClearCart = () => {
+    setCartProducts([]);
+    deleteShoppingCart();
+  };
+
   return (
-    <div>
+    <div className="bg-orange-300  p-10  text-slate-900">
       <h1 className="text-xl font-bold text-center mb-2">Order Summery</h1>
       <h1 className="text-center text-lg font-semibold mb-5">
         Selected Items: {quantity}
@@ -43,10 +54,9 @@ const Cart = ({ cartProducts, children, handleClearCart }) => {
         >
           Clear Cart <FontAwesomeIcon className="text-xl" icon={faTrashCan} />
         </button>
-        {children}
       </div>
     </div>
   );
 };
 
-export default Cart;
+export default ShoppingCart;

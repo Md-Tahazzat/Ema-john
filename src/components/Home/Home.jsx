@@ -12,16 +12,21 @@ const Home = () => {
         const currentScroll = window.pageYOffset;
         if (
           currentScroll < lastScroll &&
-          !headerEl.classList.contains("sticky")
+          headerEl.classList.contains("-translate-y-24")
         ) {
-          headerEl.classList.add("sticky");
-          cartContainer.classList.add("top-14");
+          headerEl.classList.remove("-translate-y-24");
+          cartContainer.classList.add("duration-500");
+          cartContainer.classList.remove("-translate-y-16");
+          cartContainer.classList.add("translate-y-0");
+          // cartContainer.classList.add("-translate-y-0");
         } else if (
           currentScroll > lastScroll &&
-          headerEl.classList.contains("sticky")
+          !headerEl.classList.contains("-translate-y-24")
         ) {
-          headerEl.classList.remove("sticky");
-          cartContainer.classList.remove("top-14");
+          headerEl.classList.add("-translate-y-24");
+          cartContainer.classList.add("-translate-y-16");
+          cartContainer.classList.remove("duration-500");
+          cartContainer.classList.remove("translate-y-0");
         }
         lastScroll = currentScroll;
       });

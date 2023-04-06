@@ -57,8 +57,8 @@ const ShopContainer = () => {
     setCart([]);
   };
   return (
-    <div className="flex relative">
-      <div className="md:w-8/12 lg:w-9/12 grid md:grid-cols-2 lg:grid-cols-3 gap-5 mt-6 md:mt-10">
+    <div className="px-2 md:px-0 md:flex relative">
+      <div className="w-full md:w-8/12 lg:w-9/12 grid md:grid-cols-2 lg:grid-cols-3 gap-5 mt-6 md:mt-10">
         {products.map((product) => (
           <Product
             handleAddToCart={handleAddToCart}
@@ -69,7 +69,7 @@ const ShopContainer = () => {
       </div>
       <div
         id="cart-container"
-        className="bg-orange-300 md:w-4/12 lg:w-3/12 ml-5 p-10 md:sticky right-0 top-0 h-screen  text-slate-900"
+        className="bg-orange-300 rounded-lg md:rounded-none hidden md:inline-block md:w-4/12 lg:w-3/12 md:ml-5 p-10 h-screen translate-y-0 duration-500 duration-200 md:sticky top-16 text-slate-900"
       >
         <Cart cartProducts={cart} handleClearCart={handleClearCart}>
           <Link to="orderReview">

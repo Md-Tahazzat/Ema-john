@@ -4,7 +4,7 @@ import React from "react";
 
 const ReviewItem = ({ product, handleRemoveItem }) => {
   const { id, name, img, price, quantity } = product;
-  console.log(product);
+
   return (
     <div className="mb-5 border p-4 hover:bg-slate-200 dark:bg-slate-800 hover:border-slate-600 dark:hover:border-slate-200 dark:hover:bg-slate-700 rounded-md durat flex justify-between items-center">
       <img className="w-[91px] rounded-md" src={img} alt="" />

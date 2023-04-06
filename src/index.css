@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 .active {
-  background-color: rgb(129, 4, 207);
+  background-color: #8104cf;
   padding-block: 0 !important;
 }
 
@@ -12,4 +12,40 @@
   text-decoration: none;
   font-size: 1.1rem;
   border-radius: px !important;
+}
+
+@media (max-width: 578px) {
+  .link {
+    margin-block: 1.5px;
+    position: relative;
+    padding: 5px 10px;
+  }
+  .link::after {
+    content: "";
+    position: absolute;
+    display: block;
+    width: 2px;
+    height: 100%;
+    top: 0px;
+    left: -2px;
+    background-color: rgba(111, 111, 111, 0.347);
+    border-radius: 10px;
+    border: 1px solid rgba(160, 160, 160, 0.45);
+  }
+
+  .active {
+    background-color: transparent;
+    margin: 1.5px 0;
+    padding-block: 5px !important;
+  }
+  .active::before {
+    content: "";
+    position: absolute;
+    display: block;
+    width: 3px;
+    height: 100%;
+    top: 0px;
+    left: -2px;
+    background-color: #8104cf;
+  }
 }

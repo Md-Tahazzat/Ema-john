@@ -8,6 +8,7 @@ import OrderReview from "./components/OrderReview/OrderReview";
 import ManageInventory from "./components/ManageInventory/ManageInventory";
 import FileNotFound from "./components/FileNotFound/FileNotFound";
 import { cartProductsLoader } from "./components/utilities/CartProductsLoader";
+import ShoppingCart from "./components/ShoppingCart/ShoppingCart";
 
 const router = createBrowserRouter([
   {
@@ -26,6 +27,11 @@ const router = createBrowserRouter([
       {
         path: "manageInventory",
         element: <ManageInventory></ManageInventory>,
+      },
+      {
+        path: "shoppingCart",
+        element: <ShoppingCart></ShoppingCart>,
+        loader: cartProductsLoader,
       },
       {
         path: "*",

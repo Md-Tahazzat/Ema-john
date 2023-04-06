@@ -1,8 +1,12 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faMoon, faSun } from "@fortawesome/free-solid-svg-icons";
+import {
+  faCartShopping,
+  faMoon,
+  faSun,
+} from "@fortawesome/free-solid-svg-icons";
 import React, { useEffect, useState } from "react";
 import logo from "../../assets/images/Logo.svg";
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 
 const Header = () => {
   const [theme, setTheme] = useState(false);
@@ -23,12 +27,12 @@ const Header = () => {
   return (
     <div
       id="header"
-      className="w-full mx-0 duration-300 backdrop:blur top-0 z-50 bg-slate-500/90 border-b dark:border-slate-500 antialiased dark:bg-slate-800/95"
+      className="w-full mx-0 duration-300 backdrop:blur sticky top-0 z-50 bg-slate-500/90 border-b dark:border-slate-500 antialiased dark:bg-slate-800/95"
     >
       <div className="navbar w-full px-2 md:px-5 max-w-[90rem] mx-auto text-white">
-        <div className="navbar-start">
+        <div className="md:navbar-start w-full flex justify-between">
           <div className="dropdown bg-inherit">
-            <label tabIndex={0} className="btn btn-ghost lg:hidden">
+            <label tabIndex={0} className="btn btn-ghost md:hidden">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 className="h-5 w-5"
@@ -46,25 +50,46 @@ const Header = () => {
             </label>
             <ul
               tabIndex={0}
-              className="menu menu-compact dropdown-content mt-3 bg-slate-500/90 rounded-lg p-2 shadow w-44"
+              className="menu menu-compact dropdown-content  mt-3 bg-slate-500/90 dark:bg-slate-800/90 rounded-lg p-2 shadow w-60 "
             >
               <li>
-                <NavLink to="/">Shop</NavLink>
+                <NavLink className="link" to="/">
+                  Shop
+                </NavLink>
               </li>
               <li>
-                <NavLink to="orderReview">Order Review</NavLink>
+                <NavLink className="link" to="orderReview">
+                  Order Review
+                </NavLink>
               </li>
               <li>
-                <NavLink to="manageInventory">Manage Inventory</NavLink>
+                <NavLink className="link" to="manageInventory">
+                  Manage Inventory
+                </NavLink>
               </li>
               <li>
-                <NavLink to="login">Login</NavLink>
+                <NavLink className="link" to="login">
+                  Login
+                </NavLink>
+              </li>
+              <li>
+                <div
+                  className="link inline-flex items-center"
+                  onClick={handleThemeChange}
+                >
+                  {!theme ? "Light" : "Dark"}{" "}
+                  <FontAwesomeIcon icon={!theme ? faSun : faMoon} />
+                </div>
               </li>
             </ul>
           </div>
+
           <img className="ml-auto md:ml-0" src={logo} alt="" />
+          <Link to="shoppingCart" className="md:hidden ml-auto mr-4">
+            <FontAwesomeIcon icon={faCartShopping} />
+          </Link>
         </div>
-        <div className="navbar-end hidden lg:flex">
+        <div className="navbar-end hidden w-full md:flex">
           <ul className="menu menu-horizontal px-1">
             <li>
               <NavLink className="link" to="/">
@@ -83,8 +108,11 @@ const Header = () => {
             </li>
 
             <li>
-              <button className="text-xl mx-4" onClick={handleThemeChange}>
-                <FontAwesomeIcon icon={theme ? faSun : faMoon} />
+              <button
+                className="text-xl mx-4 md:mx-0"
+                onClick={handleThemeChange}
+              >
+                <FontAwesomeIcon icon={!theme ? faSun : faMoon} />
               </button>
             </li>
             <li>
