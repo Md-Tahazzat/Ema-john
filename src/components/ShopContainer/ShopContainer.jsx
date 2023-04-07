@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import Cart from "../Cart/Cart";
 import Product from "../Product/Product";
 import {
@@ -9,16 +9,22 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
+import { CartProductContext } from "../Home/Home";
 
 const ShopContainer = () => {
   const [products, setProducts] = useState([]);
   const [cart, setCart] = useState([]);
+  const [productsAmount, setProductsAmount] = useContext(CartProductContext);
+
   useEffect(() => {
     fetch("products.json")
       .then((res) => res.json())
       .then((data) => setProducts(data));
   }, []);
   const handleAddToCart = (product) => {
+    // set products amount which is added to cart.
+    setProductsAmount(productsAmount + 1);
+
     // if product already exist in cart, quantity will increase by 1.
     let isExist = false;
     cart.forEach((pd) => {

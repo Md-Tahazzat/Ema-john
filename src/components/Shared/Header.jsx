@@ -8,8 +8,9 @@ import React, { useEffect, useState } from "react";
 import logo from "../../assets/images/Logo.svg";
 import { Link, NavLink } from "react-router-dom";
 
-const Header = () => {
+const Header = ({ productsAmount }) => {
   const [theme, setTheme] = useState(false);
+
   useEffect(() => {
     const savedTheme = localStorage.getItem("theme") || "light";
     document.body.classList = savedTheme;
@@ -27,7 +28,7 @@ const Header = () => {
   return (
     <div
       id="header"
-      className="w-full mx-0 duration-300 backdrop:blur sticky top-0 z-50 bg-slate-500/90 border-b dark:border-slate-500 antialiased dark:bg-slate-800/95"
+      className="w-full mx-0 duration-300 backdrop:blur sticky -top-1 md:top-0 z-50 bg-slate-500/95 border-b dark:border-slate-500 antialiased dark:bg-slate-800/95"
     >
       <div className="navbar w-full px-2 md:px-5 max-w-[90rem] mx-auto text-white">
         <div className="md:navbar-start w-full flex justify-between">
@@ -85,8 +86,13 @@ const Header = () => {
           </div>
 
           <img className="ml-auto md:ml-0" src={logo} alt="" />
-          <Link to="shoppingCart" className="md:hidden ml-auto mr-4">
-            <FontAwesomeIcon icon={faCartShopping} />
+          <Link to="shoppingCart" className="md:hidden ml-auto mr-4 indicator">
+            <FontAwesomeIcon className="text-xl" icon={faCartShopping} />
+            {productsAmount > 0 && (
+              <span className="indicator-item badge text-xs px-1 border border-slate-500/80 bg-slate-500/90 dark:bg-slate-800/95">
+                {productsAmount}
+              </span>
+            )}
           </Link>
         </div>
         <div className="navbar-end hidden w-full md:flex">

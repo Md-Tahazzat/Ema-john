@@ -1,12 +1,14 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { faTrashCan } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useLoaderData } from "react-router-dom";
 import { deleteShoppingCart } from "../utilities/fakedb";
+import { CartProductContext } from "../Home/Home";
 
 const ShoppingCart = () => {
   const locatStorageProducts = useLoaderData();
   const [cartProducts, setCartProducts] = useState(locatStorageProducts);
+  const [productsAmount, setProductsAmount] = useContext(CartProductContext);
 
   let price = 0;
   let tax = 0;
@@ -27,6 +29,7 @@ const ShoppingCart = () => {
   const handleClearCart = () => {
     setCartProducts([]);
     deleteShoppingCart();
+    setProductsAmount(0);
   };
 
   return (
