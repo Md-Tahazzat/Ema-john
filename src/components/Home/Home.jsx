@@ -2,7 +2,6 @@ import React, { createContext, useEffect, useState } from "react";
 import Header from "../Shared/Header";
 import { Outlet } from "react-router-dom";
 import { getShoppingCart } from "../utilities/fakedb";
-import Loading from "../Loading/Loading";
 import Footer from "../Shared/Footer";
 
 export const CartProductContext = createContext(null);

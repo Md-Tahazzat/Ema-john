@@ -1,13 +1,18 @@
 import React, { useState } from "react";
-import { Link, useLoaderData } from "react-router-dom";
+import { Link, useLoaderData, useNavigation } from "react-router-dom";
 import Cart from "../Cart/Cart";
 import ReviewItem from "../ReviewItem/ReviewItem";
 import { faCreditCard } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { deleteShoppingCart, removeFromDb } from "../utilities/fakedb";
+import Loading from "../Loading/Loading";
 
 const OrderReview = () => {
   const data = useLoaderData();
+
+  const navigation = useNavigation();
+  if (navigation.state === "loading") return <Loading></Loading>;
+
   const [cart, setCart] = useState(data);
   const handleRemoveItem = (id) => {
     const remaining = cart.filter((p) => p.id !== id);
