@@ -98,7 +98,7 @@ const Header = ({ productsAmount }) => {
         <div className="navbar-end hidden w-full md:flex">
           <ul className="menu menu-horizontal px-1">
             <li>
-              <NavLink className="link" to="/shop">
+              <NavLink className="link" to="/">
                 Shop
               </NavLink>
             </li>
