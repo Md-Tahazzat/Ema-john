@@ -4,7 +4,7 @@ import Cart from "../Cart/Cart";
 import ReviewItem from "../ReviewItem/ReviewItem";
 import { faCreditCard } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { removeFromDb } from "../utilities/fakedb";
+import { deleteShoppingCart, removeFromDb } from "../utilities/fakedb";
 
 const OrderReview = () => {
   const data = useLoaderData();
@@ -15,8 +15,13 @@ const OrderReview = () => {
     removeFromDb(id);
   };
 
+  const handleClearCart = () => {
+    setCart([]);
+    deleteShoppingCart();
+  };
+
   return (
-    <div className="w-full min-h-[calc(100vh-121px)] md:h-auto flex relative">
+    <div className="w-full min-h-[calc(100vh-121px)] md:min-h-[calc(100vh-161px)] flex relative">
       <div className="w-full md:w-8/12 lg:w-7/12 mt-6 md:mt-10 mr-auto">
         {cart.length > 0 ? (
           cart.map((product) => (
@@ -38,7 +43,7 @@ const OrderReview = () => {
         id="cart-container"
         className="bg-orange-300 hidden md:block md:w-4/12 lg:w-3/12 ml-5 p-10 md:sticky right-0 top-0 min-h-[calc(100vh-121px)] md:min-h-[calc(100vh-161px)]  text-slate-900"
       >
-        <Cart cartProducts={cart}>
+        <Cart handleClearCart={handleClearCart} cartProducts={cart}>
           <Link to="/manageInventory">
             <button className="btn w-full flex items-center justify-between">
               Proceed Checkout
