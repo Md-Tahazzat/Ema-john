@@ -16,19 +16,27 @@ const OrderReview = () => {
   };
 
   return (
-    <div className="w-full h-screen flex relative">
-      <div className="md:w-8/12 lg:w-7/12 mt-6 md:mt-10 mr-auto">
-        {cart.map((product) => (
-          <ReviewItem
-            handleRemoveItem={handleRemoveItem}
-            key={product.id}
-            product={product}
-          ></ReviewItem>
-        ))}
+    <div className="w-full min-h-[calc(100vh-121px)] md:h-auto flex relative">
+      <div className="w-full md:w-8/12 lg:w-7/12 mt-6 md:mt-10 mr-auto">
+        {cart.length > 0 ? (
+          cart.map((product) => (
+            <ReviewItem
+              handleRemoveItem={handleRemoveItem}
+              key={product.id}
+              product={product}
+            ></ReviewItem>
+          ))
+        ) : (
+          <div className="w-full h-full flex flex-col items-center justify-center">
+            <p className="text-center text-2xl font-bold text-slate-500">
+              0 item, <br /> add something
+            </p>
+          </div>
+        )}
       </div>
       <div
         id="cart-container"
-        className="bg-orange-300 md:w-4/12 lg:w-3/12 ml-5 p-10 md:sticky right-0 top-0 h-screen  text-slate-900"
+        className="bg-orange-300 hidden md:block md:w-4/12 lg:w-3/12 ml-5 p-10 md:sticky right-0 top-0 min-h-[calc(100vh-121px)] md:min-h-[calc(100vh-161px)]  text-slate-900"
       >
         <Cart cartProducts={cart}>
           <Link to="/manageInventory">

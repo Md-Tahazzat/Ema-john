@@ -19,7 +19,7 @@ const Cart = ({ cartProducts, children, handleClearCart }) => {
   }
 
   return (
-    <div>
+    <div className="md:sticky md:top-32">
       <h1 className="text-xl font-bold text-center mb-2">Order Summery</h1>
       <h1 className="text-center text-lg font-semibold mb-5">
         Selected Items: {quantity}

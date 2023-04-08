@@ -33,7 +33,7 @@ const ShoppingCart = () => {
   };
 
   return (
-    <div className="bg-orange-300  p-10  text-slate-900">
+    <div className="bg-orange-300 min-h-[calc(100vh-121px)]  p-10  text-slate-900">
       <h1 className="text-xl font-bold text-center mb-2">Order Summery</h1>
       <h1 className="text-center text-lg font-semibold mb-5">
         Selected Items: {quantity}

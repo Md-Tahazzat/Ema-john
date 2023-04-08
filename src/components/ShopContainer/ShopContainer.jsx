@@ -8,19 +8,17 @@ import {
 } from "../utilities/fakedb";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
-import { Link } from "react-router-dom";
+import { Link, useLoaderData, useNavigation } from "react-router-dom";
 import { CartProductContext } from "../Home/Home";
+import Loading from "../Loading/Loading";
 
 const ShopContainer = () => {
-  const [products, setProducts] = useState([]);
+  const products = useLoaderData();
+  const navigation = useNavigation();
+  if (navigation.state === "loading") return <Loading></Loading>;
+
   const [cart, setCart] = useState([]);
   const [productsAmount, setProductsAmount] = useContext(CartProductContext);
-
-  useEffect(() => {
-    fetch("products.json")
-      .then((res) => res.json())
-      .then((data) => setProducts(data));
-  }, []);
   const handleAddToCart = (product) => {
     // set products amount which is added to cart.
     setProductsAmount(productsAmount + 1);
@@ -63,7 +61,7 @@ const ShopContainer = () => {
     setCart([]);
   };
   return (
-    <div className="px-2 md:px-0 md:flex relative">
+    <div className="px-2 md:px-0 md:flex relative md:min-h-[calc(100vh-161px)]">
       <div className="w-full md:w-8/12 lg:w-9/12 grid md:grid-cols-2 lg:grid-cols-3 gap-5 mt-6 md:mt-10">
         {products.map((product) => (
           <Product
@@ -75,7 +73,7 @@ const ShopContainer = () => {
       </div>
       <div
         id="cart-container"
-        className="bg-orange-300 rounded-lg md:rounded-none hidden md:inline-block md:w-4/12 lg:w-3/12 md:ml-5 p-10 h-screen translate-y-0 duration-500 duration-200 md:sticky top-16 text-slate-900"
+        className="bg-orange-300 min-h-[calc(100vh-121px)] md:min-h-[calc(100vh-161px)] rounded-lg md:rounded-none hidden md:inline-block md:w-4/12 lg:w-3/12 md:ml-5 p-10 text-slate-900"
       >
         <Cart cartProducts={cart} handleClearCart={handleClearCart}>
           <Link to="orderReview">

@@ -2,17 +2,18 @@ import React, { createContext, useEffect, useState } from "react";
 import Header from "../Shared/Header";
 import { Outlet } from "react-router-dom";
 import { getShoppingCart } from "../utilities/fakedb";
+import Loading from "../Loading/Loading";
+import Footer from "../Shared/Footer";
 
 export const CartProductContext = createContext(null);
 
 const Home = () => {
   const [productsAmount, setProductsAmount] = useState(0);
-  console.log(productsAmount);
 
+  // setEvent listener to add scrolling effect on header element.
   useEffect(() => {
     setTimeout(() => {
       const headerEl = document.getElementById("header");
-      const cartContainer = document.getElementById("cart-container");
       let lastScroll = 0;
       window.addEventListener("scroll", () => {
         const currentScroll = window.pageYOffset;
@@ -21,18 +22,11 @@ const Home = () => {
           headerEl.classList.contains("-translate-y-24")
         ) {
           headerEl.classList.remove("-translate-y-24");
-          cartContainer.classList.add("duration-500");
-          cartContainer.classList.remove("-translate-y-16");
-          cartContainer.classList.add("translate-y-0");
-          // cartContainer.classList.add("-translate-y-0");
         } else if (
           currentScroll > lastScroll &&
           !headerEl.classList.contains("-translate-y-24")
         ) {
           headerEl.classList.add("-translate-y-24");
-          cartContainer.classList.add("-translate-y-16");
-          cartContainer.classList.remove("duration-500");
-          cartContainer.classList.remove("translate-y-0");
         }
         lastScroll = currentScroll;
       });
@@ -48,6 +42,7 @@ const Home = () => {
     }
     setProductsAmount(cartProduct);
   }, []);
+
   return (
     <div className="App bg-slate-50 dark:bg-slate-900 dark:text-slate-400">
       <Header productsAmount={productsAmount}></Header>
@@ -56,6 +51,7 @@ const Home = () => {
           <Outlet />
         </div>
       </CartProductContext.Provider>
+      <Footer></Footer>
     </div>
   );
 };
