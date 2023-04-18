@@ -49,7 +49,7 @@ const OrderReview = () => {
         className="bg-orange-300 hidden md:block md:w-4/12 lg:w-3/12 ml-5 p-10 md:sticky right-0 top-0 min-h-[calc(100vh-121px)] md:min-h-[calc(100vh-161px)]  text-slate-900"
       >
         <Cart handleClearCart={handleClearCart} cartProducts={cart}>
-          <Link to="/manageInventory">
+          <Link to="/checkout">
             <button className="btn w-full flex items-center justify-between">
               Proceed Checkout
               <FontAwesomeIcon className="text-xl" icon={faCreditCard} />

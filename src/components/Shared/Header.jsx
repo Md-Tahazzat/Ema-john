@@ -2,15 +2,26 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faCartShopping,
   faMoon,
+  faSpinner,
   faSun,
 } from "@fortawesome/free-solid-svg-icons";
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import logo from "../../assets/images/Logo.svg";
-import { Link, NavLink } from "react-router-dom";
+import {
+  Link,
+  NavLink,
+  Navigate,
+  useLocation,
+  useNavigate,
+} from "react-router-dom";
+import { AuthContext } from "../Provider/AuthProvider";
 
 const Header = ({ productsAmount }) => {
+  const location = useLocation();
+  const { user, handleLogOutUser, loading } = useContext(AuthContext);
   const [theme, setTheme] = useState(false);
 
+  // useEffect to toggle theme
   useEffect(() => {
     const savedTheme = localStorage.getItem("theme") || "light";
     document.body.classList = savedTheme;
@@ -24,6 +35,13 @@ const Header = ({ productsAmount }) => {
       document.body.classList = "light";
     }
     localStorage.setItem("theme", theme ? "dark" : "light");
+  };
+
+  // logOut handler
+  const handleLogOut = () => {
+    handleLogOutUser().then((result) => {
+      <Navigate to="/login" state={{ from: location }} replace={true} />;
+    });
   };
   return (
     <div
@@ -69,9 +87,15 @@ const Header = ({ productsAmount }) => {
                 </NavLink>
               </li>
               <li>
-                <NavLink className="link" to="login">
-                  Login
-                </NavLink>
+                {user ? (
+                  <button onClick={handleLogOut} className="link">
+                    Log out
+                  </button>
+                ) : (
+                  <NavLink className="link" to="login">
+                    Login
+                  </NavLink>
+                )}
               </li>
               <li>
                 <div
@@ -122,9 +146,22 @@ const Header = ({ productsAmount }) => {
               </button>
             </li>
             <li>
-              <NavLink className="link" to="login">
-                Login
-              </NavLink>
+              {loading ? (
+                <p>
+                  <FontAwesomeIcon
+                    className="text-slate-200 da w-6 h-6 animate-spin"
+                    icon={faSpinner}
+                  />
+                </p>
+              ) : user ? (
+                <button onClick={handleLogOut} className="link">
+                  Log out
+                </button>
+              ) : (
+                <NavLink className="link" to="login">
+                  Login
+                </NavLink>
+              )}
             </li>
           </ul>
         </div>

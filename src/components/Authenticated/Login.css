@@ -1,0 +1,26 @@
+.input-box input {
+  position: relative;
+}
+.input-form {
+  box-sizing: border-box;
+}
+.input-box label {
+  position: relative;
+  font-size: 1.25rem;
+  top: -40px;
+  left: 12px;
+  padding: 0 5px;
+  color: black;
+  transition: 0.3s;
+}
+
+.input-box {
+  margin-bottom: 15px;
+}
+
+.input-box input:focus ~ label,
+.input-box input:valid ~ label {
+  font-size: 0.9rem;
+  top: -61px;
+  left: 12px;
+}
